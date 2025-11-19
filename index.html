@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HYPE SQUAD - Заявка</title>
+    <link rel="icon" href="https://i.postimg.cc/DfRgJXx9/Bezymannyj22.png" type="image/x-icon">
+    <!-- Добавляем Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0f0e11;
+            background-image: 
+                linear-gradient(rgba(15, 14, 17, 0.9), rgba(15, 14, 17, 0.9)),
+                url('https://framerusercontent.com/images/mnSJcLrRsxC3x00UuNuqZAtE.gif');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Twitch-подобная сетка */
+        .twitch-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(145, 71, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(145, 71, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        /* Анимированные линии */
+        .scan-line {
+            position: fixed;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #9147ff, transparent);
+            z-index: -1;
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: 0%; opacity: 0; }
+            50% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        /* Кнопка домой */
+        .home-button {
+            display: block;
+            margin: 20px auto;
+            background: linear-gradient(135deg, #1f1b2e, #2a2356);
+            color: #ffffff;
+            border: 2px solid #9147ff;
+            padding: 12px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 1000;
+            box-shadow: 0 0 10px rgba(145, 71, 255, 0.5);
+            text-shadow: 0 0 5px #9147ff;
+            border-radius: 5px;
+            max-width: 200px;
+        }
+
+        .home-button:hover {
+            background: linear-gradient(135deg, #2a2356, #352a6e);
+            color: #bf94ff;
+            box-shadow: 0 0 15px #9147ff;
+            text-shadow: 0 0 10px #bf94ff;
+        }
+
+        /* Контейнер заявки */
+        .application-container {
+            max-width: 800px;
+            margin: 50px auto 20px;
+            background: linear-gradient(135deg, rgba(31, 27, 46, 0.9), rgba(42, 35, 86, 0.9));
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(145, 71, 255, 0.3);
+            overflow: hidden;
+            border: 2px solid #9147ff;
+        }
+
+        .application-header {
+            background: linear-gradient(135deg, rgba(145, 71, 255, 0.8), rgba(191, 148, 255, 0.8));
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #9147ff;
+            position: relative;
+        }
+
+        .logo-container {
+            margin-bottom: 15px;
+        }
+
+        .squad-logo {
+            max-width: 120px;
+            max-height: 120px;
+            border-radius: 10px;
+            border: 2px solid #ffffff;
+            box-shadow: 0 0 15px rgba(145, 71, 255, 0.7);
+        }
+
+        .application-header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px #9147ff;
+        }
+
+        .application-header h2 {
+            font-size: 18px;
+            font-weight: normal;
+            opacity: 0.9;
+        }
+
+        .user-panel {
+            background: linear-gradient(135deg, rgba(31, 27, 46, 0.7), rgba(42, 35, 86, 0.7));
+            padding: 15px 20px;
+            border-bottom: 1px solid #9147ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-panel input, .user-panel select {
+            padding: 8px 12px;
+            background: linear-gradient(135deg, #1f1b2e, #2a2356);
+            border: 1px solid #9147ff;
+            color: #ffffff;
+            border-radius: 5px;
+            font-size: 14px;
+            width: 200px;
+            box-shadow: 0 0 5px rgba(145, 71, 255, 0.3);
+        }
+
+        .user-panel input:focus, .user-panel select:focus {
+            outline: none;
+            border-color: #bf94ff;
+            box-shadow: 0 0 10px #9147ff;
+        }
+
+        .apply-button {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #1f1b2e, #2a2356);
+            color: #ffffff;
+            border: 2px solid #9147ff;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(145, 71, 255, 0.5);
+            text-shadow: 0 0 5px #9147ff;
+            transition: all 0.3s;
+        }
+
+        .apply-button:hover {
+            background: linear-gradient(135deg, #2a2356, #352a6e);
+            color: #bf94ff;
+            box-shadow: 0 0 15px #9147ff;
+            text-shadow: 0 0 10px #bf94ff;
+        }
+
+        .apply-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            border-color: #666;
+            color: #666;
+            box-shadow: none;
+            text-shadow: none;
+        }
+
+        .nickname-display {
+            margin-left: auto;
+            font-weight: bold;
+            color: #9147ff;
+            text-shadow: 0 0 5px #9147ff;
+        }
+
+        .connection-status {
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            background: linear-gradient(135deg, rgba(31, 27, 46, 0.7), rgba(42, 35, 86, 0.7));
+            border-bottom: 1px solid #9147ff;
+        }
+
+        .status-connected {
+            color: #00ff7f;
+            text-shadow: 0 0 5px #00ff7f;
+        }
+
+        .status-disconnected {
+            color: #ff4757;
+            text-shadow: 0 0 5px #ff4757;
+        }
+
+        .application-messages {
+            height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(31, 27, 46, 0.7), rgba(42, 35, 86, 0.7));
+        }
+
+        /* Стили для скроллбара */
+        .application-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .application-messages::-webkit-scrollbar-track {
+            background: #1f1b2e;
+        }
+
+        .application-messages::-webkit-scrollbar-thumb {
+            background: #9147ff;
+            border-radius: 3px;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            max-width: 80%;
+            word-wrap: break-word;
+            animation: messageSlide 0.3s ease-out;
+        }
+
+        .message.web {
+            background: linear-gradient(135deg, rgba(0, 255, 127, 0.2), rgba(0, 255, 127, 0.05));
+            border-left: 4px solid #00ff7f;
+            margin-left: auto;
+            border: 1px solid #00ff7f;
+        }
+
+        .message.system {
+            background: linear-gradient(135deg, rgba(145, 71, 255, 0.2), rgba(145, 71, 255, 0.05));
+            border-left: 4px solid #9147ff;
+            margin: 0 auto;
+            max-width: 90%;
+            text-align: center;
+            border: 1px solid #9147ff;
+        }
+
+        .message-header {
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .message.web .message-header {
+            color: #00ff7f;
+            text-shadow: 0 0 5px #00ff7f;
+        }
+
+        .message.system .message-header {
+            color: #ffffff;
+            text-shadow: 0 0 5px #ffffff;
+        }
+
+        .message-text {
+            line-height: 1.4;
+        }
+
+        .message.system .message-text {
+            color: #ffffff;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: #bf94ff;
+            text-align: right;
+            margin-top: 5px;
+        }
+
+        .application-input-container {
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(31, 27, 46, 0.7), rgba(42, 35, 86, 0.7));
+            border-top: 1px solid #9147ff;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        #messageInput {
+            flex: 1;
+            padding: 12px 16px;
+            background: linear-gradient(135deg, #1f1b2e, #2a2356);
+            border: 2px solid #9147ff;
+            color: #ffffff;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+            box-shadow: 0 0 5px rgba(145, 71, 255, 0.3);
+        }
+
+        #messageInput:focus {
+            border-color: #bf94ff;
+            box-shadow: 0 0 10px #9147ff;
+        }
+
+        #sendButton {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #1f1b2e, #2a2356);
+            color: #ffffff;
+            border: 2px solid #9147ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(145, 71, 255, 0.5);
+            text-shadow: 0 0 5px #9147ff;
+        }
+
+        #sendButton:hover {
+            background: linear-gradient(135deg, #2a2356, #352a6e);
+            color: #bf94ff;
+            box-shadow: 0 0 15px #9147ff;
+            text-shadow: 0 0 10px #bf94ff;
+            transform: translateY(-2px);
+        }
+
+        #sendButton:active {
+            transform: translateY(0);
+        }
+
+        #sendButton:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            border-color: #666;
+            color: #666;
+            box-shadow: none;
+            text-shadow: none;
+        }
+
+        /* Анимация для новых сообщений */
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Стили для дополнительных полей формы */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #bf94ff;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .application-container {
+                margin: 20px auto 10px;
+            }
+
+            .application-messages {
+                height: 300px;
+            }
+
+            .message {
+                max-width: 90%;
+            }
+
+            .input-group {
+                flex-direction: column;
+            }
+
+            #sendButton {
+                border-radius: 12px;
+            }
+
+            .user-panel {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .user-panel input, .user-panel select {
+                width: 100%;
+            }
+
+            .nickname-display {
+                margin-left: 0;
+                margin-top: 10px;
+                text-align: center;
+            }
+
+            .squad-logo {
+                max-width: 80px;
+                max-height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Twitch-подобная сетка -->
+    <div class="twitch-grid"></div>
+    
+    <!-- Анимированные линии -->
+    <div class="scan-line" style="animation-delay: 0s;"></div>
+    <div class="scan-line" style="animation-delay: 1s;"></div>
+    <div class="scan-line" style="animation-delay: 2s;"></div>
+
+    <div class="application-container">
+        <div class="application-header">
+            <!-- ЗДЕСЬ МОЖНО ЗАМЕНИТЬ ССЫЛКУ НА ВАШЕ ИЗОБРАЖЕНИЕ -->
+            <div class="logo-container">
+                <img src="https://i.postimg.cc/DfRgJXx9/Bezymannyj22.png" alt="Hype Squad Logo" class="squad-logo">
+            </div>
+            <img src="https://i.postimg.cc/nLxSsDc3/Bezymannyj123.png" alt="Hype Squad Logo1" class="squad-logo1" style="width: 200px;">
+        </div>
+
+        <div class="user-panel">
+            <label for="userNickname">Ваш ник на Twitch:</label>
+            <input type="text" id="userNickname" placeholder="Введите ваш ник..." autocomplete="off">
+            <button class="apply-button" id="applyNickname">Применить</button>
+            <div class="nickname-display" id="nicknameDisplay"></div>
+        </div>
+
+        <div class="connection-status">
+            <span id="statusText" class="status-connected">● Онлайн</span>
+        </div>
+
+        <div class="application-messages" id="applicationMessages">
+            <!-- Сообщения будут добавляться здесь -->
+        </div>
+
+        <div class="application-input-container">
+            <div class="form-group">
+                <label for="messageInput">Расскажите о себе и почему вы хотите присоединиться к нам. Так же не забудте оставить ссылки на ваши контакты Twitch, Telegram (обязательно), Discord:</label>
+                <div class="input-group">
+                    <input type="text" id="messageInput" placeholder="Сначала установите ник" autocomplete="off" disabled>
+                    <button id="sendButton" onclick="sendApplication()" disabled>Отправить заявку</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Кнопка домой -->
+    <button class="home-button" onclick="window.location.href='https://www.twitch.tv/team/playhangames'">
+        <i class="fas fa-home"></i> Наш Сквад
+    </button>
+
+    <script>
+        // ════════════════════════════════════════════════════════════════════════
+        // НАСТРОЙКИ - ЗАПОЛНИТЕ ЭТИ ДАННЫЕ
+        // ════════════════════════════════════════════════════════════════════════
+
+        const BOT_CONFIG = {
+            // Токен вашего бота Telegram (получите у @BotFather)
+            token: '7648746510:AAECKk-hOAIMd1_eQZItO8X69lQgKNl6Eoo',
+            
+            // ID вашей группы Telegram (начинается с -100)
+            chatId: '-1002678159454',
+            
+            // ID темы (треда) для заявок
+            // Чтобы получить ID темы:
+            // 1. Перейдите в нужную тему в группе
+            // 2. Перешлите любое сообщение из темы боту @userinfobot
+            // 3. В ответном сообщении найдите "Forward from chat" - это ID темы
+            messageThreadId: 2870  // ЗАМЕНИТЕ НА РЕАЛЬНЫЙ ID ТЕМЫ
+        };
+
+        // ════════════════════════════════════════════════════════════════════════
+        // КОНЕЦ НАСТРОЕК
+        // ════════════════════════════════════════════════════════════════════════
+
+        // Элементы DOM
+        const applicationMessages = document.getElementById('applicationMessages');
+        const messageInput = document.getElementById('messageInput');
+        const statusText = document.getElementById('statusText');
+        const sendButton = document.getElementById('sendButton');
+        const userNicknameInput = document.getElementById('userNickname');
+        const applyNicknameButton = document.getElementById('applyNickname');
+        const nicknameDisplay = document.getElementById('nicknameDisplay');
+
+        // Текущий ник пользователя
+        let currentNickname = '';
+
+        // Инициализация заявки
+        function initializeApplication() {
+            // Добавляем системное сообщение с задержкой
+            setTimeout(addSystemMessage, 800);
+            
+            // Фокус на поле ника
+            userNicknameInput.focus();
+            
+            // Обработчики для поля ника
+            userNicknameInput.addEventListener('input', updateApplyButton);
+            userNicknameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    applyNickname();
+                }
+            });
+
+            // Обработчик для кнопки Применить
+            applyNicknameButton.addEventListener('click', applyNickname);
+
+            // Обработчики для поля сообщения
+            messageInput.addEventListener('input', updateSendButtonState);
+            messageInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendApplication();
+                }
+            });
+        }
+
+        // Добавление системного сообщения
+        function addSystemMessage() {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message system';
+            
+            const timeString = new Date().toLocaleTimeString('ru-RU', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            messageDiv.innerHTML = `
+                <div class="message-header">💡 Информация о Hype Squad</div>
+                <div class="message-text">
+                    <strong>HYPE SQUAD - сообщество перспективных стримеров Twitch!</strong><br><br>
+                    📝 <strong>Требования для вступления:</strong><br>
+                    • Быть компаньоном/партнером Twitch<br>
+                    • Стримить минимум 3 раза в неделю<br>
+                    • Возраст от 18 лет, Адекватность и Грамотность<br>
+                    • Защищать интересы сквада и его участников, если таковые имеются<br>
+                    • Нельзя быть в 2х или более сквадах одновременно<br>
+                    • Рейды коллегам или совместные игры с ними (по желанию, но приветствуются!)<br><br>
+                    🔄 <strong>После подачи заявки:</strong><br>
+                    • Ожидайте рассмотрения вашей заявки<br>
+                    • С вами свяжутся для уточнения деталей<br>
+                    • Ответ может занять некоторое время
+                </div>
+                <div class="message-time">${timeString}</div>
+            `;
+
+            applicationMessages.appendChild(messageDiv);
+            applicationMessages.scrollTop = applicationMessages.scrollHeight;
+        }
+
+        // Обновление состояния кнопки Применить
+        function updateApplyButton() {
+            const hasNickname = userNicknameInput.value.trim().length > 0;
+            applyNicknameButton.disabled = !hasNickname;
+        }
+
+        // Применение ника
+        function applyNickname() {
+            const nickname = userNicknameInput.value.trim();
+            if (nickname) {
+                currentNickname = nickname;
+                nicknameDisplay.textContent = `Текущий ник: ${currentNickname}`;
+                messageInput.disabled = false;
+                messageInput.placeholder = "Расскажите о себе и почему хотите присоединиться к Hype Squad...";
+                messageInput.focus();
+                updateSendButtonState();
+                
+                // Блокируем поле ника после применения
+                userNicknameInput.disabled = true;
+                applyNicknameButton.disabled = true;
+                applyNicknameButton.textContent = "✓ Применен";
+                applyNicknameButton.style.background = "#6c757d";
+            }
+        }
+
+        // Обновление состояния кнопки отправки
+        function updateSendButtonState() {
+            const hasMessage = messageInput.value.trim().length > 0;
+            sendButton.disabled = !(currentNickname && hasMessage);
+        }
+
+        // Функция для добавления сообщения в чат
+        function addMessage(text, timestamp = new Date()) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message web';
+            
+            const timeString = timestamp.toLocaleTimeString('ru-RU', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            messageDiv.innerHTML = `
+                <div class="message-header">${currentNickname}</div>
+                <div class="message-text">${text}</div>
+                <div class="message-time">${timeString}</div>
+            `;
+
+            applicationMessages.appendChild(messageDiv);
+            applicationMessages.scrollTop = applicationMessages.scrollHeight;
+        }
+
+        // Функция отправки заявки в Telegram
+        async function sendApplicationToTelegram(text) {
+            const url = `https://api.telegram.org/bot${BOT_CONFIG.token}/sendMessage`;
+            
+            // Форматируем заявку
+            const formattedMessage = `
+НОВАЯ ЗАЯВКА В HYPE SQUAD
+
+👤 Ник: ${currentNickname}
+📝 Сообщение: ${text}
+            `.trim();
+            
+            const requestBody = {
+                chat_id: BOT_CONFIG.chatId,
+                text: formattedMessage
+            };
+
+            // Добавляем ID темы, если он указан
+            if (BOT_CONFIG.messageThreadId) {
+                requestBody.message_thread_id = BOT_CONFIG.messageThreadId;
+            }
+            
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestBody)
+            });
+
+            const result = await response.json();
+            
+            if (!result.ok) {
+                throw new Error(result.description || 'Ошибка отправки');
+            }
+
+            return result;
+        }
+
+        // Основная функция отправки заявки
+        async function sendApplication() {
+            const text = messageInput.value.trim();
+            
+            if (!text || !currentNickname) {
+                return;
+            }
+
+            // Блокируем кнопку на время отправки
+            const originalText = sendButton.textContent;
+            sendButton.disabled = true;
+            sendButton.textContent = 'Отправка...';
+            messageInput.disabled = true;
+
+            try {
+                // Показываем сообщение локально сразу
+                addMessage(text);
+                
+                // Отправляем заявку в Telegram
+                await sendApplicationToTelegram(text);
+                
+                messageInput.value = '';
+                
+                // Добавляем сообщение об успешной отправке
+                const successDiv = document.createElement('div');
+                successDiv.className = 'message system';
+                successDiv.innerHTML = `
+                    <div class="message-header">✅ Заявка отправлена</div>
+                    <div class="message-text">
+                        Ваша заявка в Hype Squad получена!<br>
+                        Ожидайте рассмотрения и связи с вами.<br>
+                        Вы можете закрыть эту страницу.
+                    </div>
+                    <div class="message-time">${new Date().toLocaleTimeString('ru-RU', {hour: '2-digit', minute: '2-digit'})}</div>
+                `;
+                applicationMessages.appendChild(successDiv);
+                applicationMessages.scrollTop = applicationMessages.scrollHeight;
+                
+            } catch (error) {
+                console.error('Ошибка отправки:', error);
+                
+                // Удаляем локальное сообщение при ошибке
+                const messages = applicationMessages.querySelectorAll('.message');
+                if (messages.length > 0) {
+                    applicationMessages.removeChild(messages[messages.length - 1]);
+                }
+                
+                // Показываем ошибку на короткое время
+                statusText.textContent = '● Ошибка отправки';
+                statusText.className = 'status-disconnected';
+                setTimeout(() => {
+                    statusText.textContent = '● Онлайн';
+                    statusText.className = 'status-connected';
+                }, 3000);
+            } finally {
+                // Разблокируем кнопку
+                sendButton.disabled = false;
+                sendButton.textContent = originalText;
+                messageInput.disabled = false;
+                updateSendButtonState();
+                messageInput.focus();
+            }
+        }
+
+        // Инициализация при загрузке
+        document.addEventListener('DOMContentLoaded', initializeApplication);
+        
+        // Блокировка контекстного меню (правой кнопки мыши)
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            showNotification('Контекстное меню отключено', false);
+        });
+
+        // Блокировка F12 и Ctrl+U
+        document.addEventListener('keydown', function(e) {
+            // F12
+            if (e.keyCode === 123) {
+                e.preventDefault();
+                showNotification('Функция отключена', false);
+                return false;
+            }
+            
+            // Ctrl+U
+            if (e.ctrlKey && e.keyCode === 85) {
+                e.preventDefault();
+                showNotification('Просмотр исходного кода отключен', false);
+                return false;
+            }
+            
+            // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+            if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+                e.preventDefault();
+                showNotification('Инструменты разработчика отключены', false);
+                return false;
+            }
+        });
+    </script>
+</body>
+</html>
