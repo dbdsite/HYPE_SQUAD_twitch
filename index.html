@@ -447,7 +447,7 @@
         </div>
 
         <div class="user-panel">
-            <label for="userNickname">Ваш ник на Twitch:</label>
+            <label for="userNickname">Ваш Telegram через @:</label>
             <input type="text" id="userNickname" placeholder="Введите ваш ник..." autocomplete="off">
             <button class="apply-button" id="applyNickname">Применить</button>
             <div class="nickname-display" id="nicknameDisplay"></div>
@@ -463,7 +463,7 @@
 
         <div class="application-input-container">
             <div class="form-group">
-                <label for="messageInput">Расскажите о себе и почему вы хотите присоединиться к нам. Так же не забудте оставить ссылки на ваши контакты Twitch, Telegram (обязательно), Discord:</label>
+                <label for="messageInput">Расскажите о себе и почему вы хотите присоединиться к нам. Так же не забудте оставить ссылки на ваши контакты Twitch, Telegram, Discord:</label>
                 <div class="input-group">
                     <input type="text" id="messageInput" placeholder="Сначала установите ник" autocomplete="off" disabled>
                     <button id="sendButton" onclick="sendApplication()" disabled>Отправить заявку</button>
@@ -513,8 +513,27 @@
         // Текущий ник пользователя
         let currentNickname = '';
 
+        // Ключ для хранения статуса заявки в localStorage
+        const APPLICATION_STORAGE_KEY = 'hype_squad_application_submitted';
+
+        // Проверка, была ли уже отправлена заявка
+        function isApplicationSubmitted() {
+            return localStorage.getItem(APPLICATION_STORAGE_KEY) === 'true';
+        }
+
+        // Отметить заявку как отправленную
+        function markApplicationAsSubmitted() {
+            localStorage.setItem(APPLICATION_STORAGE_KEY, 'true');
+        }
+
         // Инициализация заявки
         function initializeApplication() {
+            // Проверяем, была ли уже отправлена заявка
+            if (isApplicationSubmitted()) {
+                showAlreadySubmittedMessage();
+                return;
+            }
+            
             // Добавляем системное сообщение с задержкой
             setTimeout(addSystemMessage, 800);
             
@@ -539,6 +558,42 @@
                     sendApplication();
                 }
             });
+        }
+
+        // Показать сообщение о том, что заявка уже отправлена
+        function showAlreadySubmittedMessage() {
+            // Блокируем все элементы ввода
+            userNicknameInput.disabled = true;
+            applyNicknameButton.disabled = true;
+            messageInput.disabled = true;
+            sendButton.disabled = true;
+            
+            // Меняем текст подсказки
+            messageInput.placeholder = "Вы уже отправили заявку";
+            userNicknameInput.placeholder = "Заявка уже отправлена";
+            
+            // Добавляем сообщение в чат
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message system';
+            
+            const timeString = new Date().toLocaleTimeString('ru-RU', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            messageDiv.innerHTML = `
+                <div class="message-header">📋 Статус заявки</div>
+                <div class="message-text">
+                    <strong>Вы уже отправили заявку в Hype Squad!</strong><br><br>
+                    ❗ <strong>Повторная заявка невозможна</strong><br>
+                    • Ваша заявка уже находится на рассмотрении<br>
+                    • Ожидайте связи от представителей сквада с вами<br>
+                </div>
+                <div class="message-time">${timeString}</div>
+            `;
+
+            applicationMessages.appendChild(messageDiv);
+            applicationMessages.scrollTop = applicationMessages.scrollHeight;
         }
 
         // Добавление системного сообщения
@@ -685,6 +740,9 @@
                 // Отправляем заявку в Telegram
                 await sendApplicationToTelegram(text);
                 
+                // Отмечаем заявку как отправленную
+                markApplicationAsSubmitted();
+                
                 messageInput.value = '';
                 
                 // Добавляем сообщение об успешной отправке
@@ -695,7 +753,7 @@
                     <div class="message-text">
                         Ваша заявка в Hype Squad получена!<br>
                         Ожидайте рассмотрения и связи с вами.<br>
-                        Вы можете закрыть эту страницу.
+                        <strong>Повторная отправка заявки невозможна.</strong>
                     </div>
                     <div class="message-time">${new Date().toLocaleTimeString('ru-RU', {hour: '2-digit', minute: '2-digit'})}</div>
                 `;
@@ -719,12 +777,14 @@
                     statusText.className = 'status-connected';
                 }, 3000);
             } finally {
-                // Разблокируем кнопку
-                sendButton.disabled = false;
-                sendButton.textContent = originalText;
-                messageInput.disabled = false;
-                updateSendButtonState();
-                messageInput.focus();
+                // Разблокируем кнопку только если отправка не удалась
+                if (!isApplicationSubmitted()) {
+                    sendButton.disabled = false;
+                    sendButton.textContent = originalText;
+                    messageInput.disabled = false;
+                    updateSendButtonState();
+                    messageInput.focus();
+                }
             }
         }
 
@@ -734,7 +794,6 @@
         // Блокировка контекстного меню (правой кнопки мыши)
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
-            showNotification('Контекстное меню отключено', false);
         });
 
         // Блокировка F12 и Ctrl+U
@@ -742,24 +801,157 @@
             // F12
             if (e.keyCode === 123) {
                 e.preventDefault();
-                showNotification('Функция отключена', false);
                 return false;
             }
             
             // Ctrl+U
             if (e.ctrlKey && e.keyCode === 85) {
                 e.preventDefault();
-                showNotification('Просмотр исходного кода отключен', false);
                 return false;
             }
             
             // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
             if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
                 e.preventDefault();
-                showNotification('Инструменты разработчика отключены', false);
                 return false;
             }
         });
     </script>
+    <!-- Скрытая панель сброса для разработчиков -->
+<div id="devResetPanel" style="position: fixed; bottom: 10px; left: 10px; background: rgba(0,0,0,0.8); padding: 10px; border-radius: 5px; border: 1px solid #9147ff; z-index: 10000; display: none;">
+    <button onclick="resetApplication()" style="background: #ff4757; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; margin-right: 5px;">
+        🔄 Сбросить заявку
+    </button>
+    <button onclick="checkApplicationStatus()" style="background: #3742fa; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; margin-right: 5px;">
+        📊 Статус
+    </button>
+    <button onclick="toggleDevPanel()" style="background: #2ed573; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">
+        ❌ Закрыть
+    </button>
+</div>
+
+<script>
+    // Функции для управления разработчиком
+    let devPanelVisible = false;
+
+    // Переключение панели разработчика
+    function toggleDevPanel() {
+        const panel = document.getElementById('devResetPanel');
+        devPanelVisible = !devPanelVisible;
+        panel.style.display = devPanelVisible ? 'block' : 'none';
+        
+        if (devPanelVisible) {
+            console.log('🔧 Панель разработчика активирована');
+        }
+    }
+
+    // Функция полного сброса регистрации
+    function resetApplication() {
+        // Удаляем данные из хранилищ
+        sessionStorage.removeItem('hype_squad_application_submitted');
+        localStorage.removeItem('hype_squad_application_submitted');
+        
+        // Сбрасываем флаги
+        if (typeof applicationSubmittedInSession !== 'undefined') {
+            applicationSubmittedInSession = false;
+        }
+        
+        // Показываем уведомление
+        showDevNotification('✅ Регистрация сброшена! Страница перезагружается...', 'success');
+        
+        console.log('🎯 РЕГИСТРАЦИЯ СБРОШЕНА:');
+        console.log('📝 sessionStorage очищен');
+        console.log('💾 localStorage очищен');
+        console.log('🚩 Флаг сессии сброшен');
+        
+        // Перезагрузка через 1.5 секунды
+        setTimeout(() => {
+            location.reload();
+        }, 1500);
+    }
+
+    // Проверить текущий статус регистрации
+    function checkApplicationStatus() {
+        const sessionStatus = sessionStorage.getItem('hype_squad_application_submitted');
+        const localStatus = localStorage.getItem('hype_squad_application_submitted');
+        const sessionFlag = typeof applicationSubmittedInSession !== 'undefined' ? applicationSubmittedInSession : 'не определен';
+        
+        console.log('📊 СТАТУС РЕГИСТРАЦИИ:');
+        console.log('sessionStorage:', sessionStatus);
+        console.log('localStorage:', localStatus);
+        console.log('Флаг сессии:', sessionFlag);
+        
+        showDevNotification('📊 Статус проверен (смотрите консоль)', 'info');
+    }
+
+    // Показать уведомление для разработчика
+    function showDevNotification(message, type = 'info') {
+        // Создаем элемент уведомления
+        const notification = document.createElement('div');
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: ${type === 'success' ? '#2ed573' : type === 'error' ? '#ff4757' : '#3742fa'};
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            z-index: 10001;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s ease-out;
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Автоматическое удаление через 3 секунды
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 3000);
+    }
+
+    // Стиль для анимации уведомления
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Активация по комбинации клавиш (Alt+Shift+R)
+    document.addEventListener('keydown', function(e) {
+        // Alt+Shift+R для активации панели
+        if (e.altKey && e.shiftKey && e.key === 'R') {
+            e.preventDefault();
+            toggleDevPanel();
+        }
+        
+        // Alt+Shift+D для быстрого сброса
+        if (e.altKey && e.shiftKey && e.key === 'D') {
+            e.preventDefault();
+            resetApplication();
+        }
+        
+        // Alt+Shift+S для проверки статуса
+        if (e.altKey && e.shiftKey && e.key === 'S') {
+            e.preventDefault();
+            checkApplicationStatus();
+        }
+    });
+
+    // Инструкция при загрузке (только в консоли)
+    setTimeout(() => {
+        console.log('🔧 Инструменты разработчика доступны:');
+        console.log('• Alt+Shift+R - Открыть панель сброса');
+        console.log('• Alt+Shift+D - Быстрый сброс регистрации');
+        console.log('• Alt+Shift+S - Проверить статус');
+    }, 2000);
+</script>
 </body>
 </html>
