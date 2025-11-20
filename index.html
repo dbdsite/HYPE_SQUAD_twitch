@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <link rel="icon" href="https://i.postimg.cc/DfRgJXx9/Bezymannyj22.png" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HYPE SQUAD - Заявка</title>
-    <link rel="icon" href="https://i.postimg.cc/DfRgJXx9/Bezymannyj22.png" type="image/x-icon">
+    <title>TWITCH HYPE SQUAD</title>
+    
+    <!-- Open Graph метатеги для корректного отображения в соцсетях -->
+    <meta property="og:title" content="Hype Squad - Twitch">
+    <meta property="og:description" content="by PHG community">
+    <meta property="og:image" content="https://i.postimg.cc/DfRgJXx9/Bezymannyj22.png">
+    <meta property="og:url" content="https://dbdsite.github.io/HYPE_SQUAD_twitch/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="HypeSquad">
+    
+    <!-- Дополнительные метатеги для ВКонтакте -->
+    <meta property="vk:image" content="https://i.postimg.cc/DfRgJXx9/Bezymannyj22.png">
+    
+    <!-- Дополнительные метатеги для Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hype Squad - Twitch">
+    <meta name="twitter:description" content="by PHG community">
+    <meta name="twitter:image" content="https://i.postimg.cc/DfRgJXx9/Bezymannyj22.png">
+    
     <!-- Добавляем Font Awesome для иконок -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -28,6 +46,189 @@
             overflow-x: hidden;
             min-height: 100vh;
             position: relative;
+        }
+
+        /* Навигационная панель */
+        .nav-panel {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .language-switcher {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+
+        .lang-button {
+            background: linear-gradient(135deg, #1f1b2e, #2a2356);
+            color: #ffffff;
+            border: 2px solid #9147ff;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(145, 71, 255, 0.5);
+            text-shadow: 0 0 5px #9147ff;
+            border-radius: 5px;
+            min-width: 120px;
+        }
+
+        .lang-button:hover {
+            background: linear-gradient(135deg, #2a2356, #352a6e);
+            color: #bf94ff;
+            box-shadow: 0 0 15px #9147ff;
+            text-shadow: 0 0 10px #bf94ff;
+            transform: translateY(-2px);
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #1f1b2e, #2a2356);
+            color: #ffffff;
+            border: 2px solid #9147ff;
+            padding: 12px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(145, 71, 255, 0.5);
+            text-shadow: 0 0 5px #9147ff;
+            border-radius: 5px;
+            min-width: 160px;
+        }
+
+        .nav-button:hover {
+            background: linear-gradient(135deg, #2a2356, #352a6e);
+            color: #bf94ff;
+            box-shadow: 0 0 15px #9147ff;
+            text-shadow: 0 0 10px #bf94ff;
+            transform: translateY(-2px);
+        }
+
+        .nav-button.active {
+            background: linear-gradient(135deg, #9147ff, #bf94ff);
+            color: #1f1b2e;
+            font-weight: bold;
+        }
+
+        /* Контейнеры разделов */
+        .section-container {
+            display: none;
+            max-width: 800px;
+            margin: 20px auto;
+            background: linear-gradient(135deg, rgba(31, 27, 46, 0.9), rgba(42, 35, 86, 0.9));
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(145, 71, 255, 0.3);
+            overflow: hidden;
+            border: 2px solid #9147ff;
+        }
+
+        .section-container.active {
+            display: block;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, rgba(145, 71, 255, 0.8), rgba(191, 148, 255, 0.8));
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #9147ff;
+        }
+
+        .section-content {
+            padding: 20px;
+            min-height: 400px;
+        }
+
+        /* Стили для списка участников и черного списка */
+        .members-grid, .blacklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .member-card, .blacklist-card {
+            background: linear-gradient(135deg, rgba(31, 27, 46, 0.8), rgba(42, 35, 86, 0.8));
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #9147ff;
+            transition: all 0.3s;
+        }
+
+        .member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(145, 71, 255, 0.4);
+        }
+
+        .member-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid #9147ff;
+            margin: 0 auto 10px;
+            object-fit: cover;
+        }
+
+        .member-name {
+            font-weight: bold;
+            color: #bf94ff;
+            margin-bottom: 5px;
+        }
+
+        .member-role {
+            font-size: 12px;
+            color: #00ff7f;
+        }
+
+        .blacklist-reason {
+            font-size: 12px;
+            color: #ff4757;
+            margin-top: 5px;
+        }
+
+        /* Стили для правил */
+        .rules-content {
+            line-height: 1.6;
+        }
+
+        .rules-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(31, 27, 46, 0.5);
+            border-radius: 8px;
+            border-left: 4px solid #9147ff;
+        }
+
+        .rules-section h3 {
+            color: #bf94ff;
+            margin-bottom: 10px;
+        }
+
+        .rules-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .rules-list li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .rules-list li:before {
+            content: "•";
+            color: #9147ff;
+            position: absolute;
+            left: 0;
         }
 
         /* Twitch-подобная сетка */
@@ -61,77 +262,7 @@
             100% { top: 100%; opacity: 0; }
         }
 
-        /* Кнопка домой */
-        .home-button {
-            display: block;
-            margin: 20px auto;
-            background: linear-gradient(135deg, #1f1b2e, #2a2356);
-            color: #ffffff;
-            border: 2px solid #9147ff;
-            padding: 12px 25px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            z-index: 1000;
-            box-shadow: 0 0 10px rgba(145, 71, 255, 0.5);
-            text-shadow: 0 0 5px #9147ff;
-            border-radius: 5px;
-            max-width: 200px;
-        }
-
-        .home-button:hover {
-            background: linear-gradient(135deg, #2a2356, #352a6e);
-            color: #bf94ff;
-            box-shadow: 0 0 15px #9147ff;
-            text-shadow: 0 0 10px #bf94ff;
-        }
-
-        /* Контейнер заявки */
-        .application-container {
-            max-width: 800px;
-            margin: 50px auto 20px;
-            background: linear-gradient(135deg, rgba(31, 27, 46, 0.9), rgba(42, 35, 86, 0.9));
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(145, 71, 255, 0.3);
-            overflow: hidden;
-            border: 2px solid #9147ff;
-        }
-
-        .application-header {
-            background: linear-gradient(135deg, rgba(145, 71, 255, 0.8), rgba(191, 148, 255, 0.8));
-            color: white;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 2px solid #9147ff;
-            position: relative;
-        }
-
-        .logo-container {
-            margin-bottom: 15px;
-        }
-
-        .squad-logo {
-            max-width: 120px;
-            max-height: 120px;
-            border-radius: 10px;
-            border: 2px solid #ffffff;
-            box-shadow: 0 0 15px rgba(145, 71, 255, 0.7);
-        }
-
-        .application-header h1 {
-            font-size: 28px;
-            margin-bottom: 5px;
-            text-shadow: 0 0 10px #9147ff;
-        }
-
-        .application-header h2 {
-            font-size: 18px;
-            font-weight: normal;
-            opacity: 0.9;
-        }
-
+        /* Стили для формы заявки */
         .user-panel {
             background: linear-gradient(135deg, rgba(31, 27, 46, 0.7), rgba(42, 35, 86, 0.7));
             padding: 15px 20px;
@@ -386,7 +517,22 @@
                 padding: 10px;
             }
 
-            .application-container {
+            .nav-panel {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-button {
+                width: 100%;
+                max-width: 250px;
+            }
+
+            .language-switcher {
+                position: static;
+                margin-top: 10px;
+            }
+
+            .section-container {
                 margin: 20px auto 10px;
             }
 
@@ -425,10 +571,41 @@
                 max-width: 80px;
                 max-height: 80px;
             }
+
+            .members-grid, .blacklist-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 15px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Навигационная панель -->
+    <div class="nav-panel">
+        <button class="nav-button active" data-section="application">
+            <i class="fas fa-file-alt"></i> <span data-i18n="application">Заявка</span>
+        </button>
+        <button class="nav-button" data-section="members">
+            <i class="fas fa-users"></i> <span data-i18n="members">Участники</span>
+        </button>
+        <button class="nav-button" data-section="rules">
+            <i class="fas fa-scroll"></i> <span data-i18n="information">Информация</span>
+        </button>
+        <button class="nav-button" data-section="blacklist">
+            <i class="fas fa-ban"></i> <span data-i18n="blacklist">Черный список</span>
+        </button>
+        <button class="nav-button" onclick="window.open('https://www.twitch.tv/team/playhangames', '_blank')">
+            <i class="fas fa-home"></i> <span data-i18n="squadOnTwitch">Сквад на Twitch</span>
+        </button>
+        
+        <!-- Переключатель языка -->
+        <div class="language-switcher">
+            <button class="lang-button" id="langToggle">
+                <i class="fas fa-globe"></i> <span id="currentLang">Русский</span>
+            </button>
+        </div>
+    </div>
+
     <!-- Twitch-подобная сетка -->
     <div class="twitch-grid"></div>
     
@@ -437,24 +614,24 @@
     <div class="scan-line" style="animation-delay: 1s;"></div>
     <div class="scan-line" style="animation-delay: 2s;"></div>
 
-    <div class="application-container">
-        <div class="application-header">
-            <!-- ЗДЕСЬ МОЖНО ЗАМЕНИТЬ ССЫЛКУ НА ВАШЕ ИЗОБРАЖЕНИЕ -->
+    <!-- Раздел Заявка -->
+    <div class="section-container active" id="application-section">
+        <div class="section-header">
             <div class="logo-container">
-                <img src="https://i.postimg.cc/DfRgJXx9/Bezymannyj22.png" alt="Hype Squad Logo" class="squad-logo">
+                <img src="https://i.postimg.cc/DfRgJXx9/Bezymannyj22.png" alt="Hype Squad Logo" class="squad-logo" style="width: 100px;">
             </div>
             <img src="https://i.postimg.cc/nLxSsDc3/Bezymannyj123.png" alt="Hype Squad Logo1" class="squad-logo1" style="width: 200px;">
         </div>
 
         <div class="user-panel">
-            <label for="userNickname">Ваш Telegram через @:</label>
-            <input type="text" id="userNickname" placeholder="Введите ваш ник..." autocomplete="off">
-            <button class="apply-button" id="applyNickname">Применить</button>
+            <label for="userNickname"></label>
+            <input type="text" id="userNickname" placeholder="" autocomplete="off">
+            <button class="apply-button" id="applyNickname"><span data-i18n="apply">Применить</span></button>
             <div class="nickname-display" id="nicknameDisplay"></div>
         </div>
 
         <div class="connection-status">
-            <span id="statusText" class="status-connected">● Онлайн</span>
+            <span id="statusText" class="status-connected">● <span data-i18n="online">Онлайн</span></span>
         </div>
 
         <div class="application-messages" id="applicationMessages">
@@ -463,19 +640,76 @@
 
         <div class="application-input-container">
             <div class="form-group">
-                <label for="messageInput">Расскажите о себе и почему вы хотите присоединиться к нам. Так же не забудте оставить ссылки на ваши контакты Twitch, Telegram, Discord:</label>
+                <label for="messageInput" data-i18n="applicationDescription">Расскажите о себе и почему вы хотите присоединиться к нам. Так же не забудте оставить ссылки на ваши контакты Twitch, Telegram, Discord:</label>
                 <div class="input-group">
-                    <input type="text" id="messageInput" placeholder="Сначала установите ник" autocomplete="off" disabled>
-                    <button id="sendButton" onclick="sendApplication()" disabled>Отправить заявку</button>
+                    <input type="text" id="messageInput" placeholder="" autocomplete="off" disabled>
+                    <button id="sendButton" onclick="sendApplication()" disabled><span data-i18n="sendApplication">Отправить заявку</span></button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Кнопка домой -->
-    <button class="home-button" onclick="window.location.href='https://www.twitch.tv/team/playhangames'">
-        <i class="fas fa-home"></i> Наш Сквад
-    </button>
+    <!-- Раздел Участники -->
+    <div class="section-container" id="members-section">
+        <div class="section-header">
+            <h1><i class="fas fa-users"></i> <span data-i18n="squadMembers">Участники Сквада</span></h1>
+        </div>
+        <div class="section-content">
+            <div class="members-grid" id="membersGrid">
+                <!-- Участники будут добавляться здесь -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Раздел Правила -->
+    <div class="section-container" id="rules-section">
+        <div class="section-header">
+            <h1><i class="fas fa-scroll"></i> <span data-i18n="squadRules">Правила и Информация Сквада</span></h1>
+        </div>
+        <div class="section-content">
+            <div class="rules-content">
+                <div class="rules-section">
+                    <h3 data-i18n="requirementsTitle">📝 Основные требования для вступления:</h3>
+                    <ul class="rules-list">
+                        <li data-i18n="req1">Быть компаньоном/партнером Twitch</li>
+                        <li data-i18n="req2">Стримить минимум 3 раза в неделю</li>
+                        <li data-i18n="req3">Возраст от 18 лет</li>
+                        <li data-i18n="req4">Адекватность и грамотность</li>
+                        <li data-i18n="req5">Нельзя быть в 2х или более сквадах одновременно</li>
+                    </ul>
+                </div>
+
+                <div class="rules-section">
+                    <h3 data-i18n="interactionTitle">🤝 Взаимодействие участников и обязаности:</h3>
+                    <ul class="rules-list">
+                        <li data-i18n="int1">Защищать интересы сквада и его участников</li>
+                        <li data-i18n="int2">Поддерживать дружескую атмосферу в сообществе</li>
+                        <li data-i18n="int3">Участвовать в жизни сквада (по возможности)</li>
+                        <li data-i18n="int4">Приоритет Рейдов коллегам  (по желанию но приветствуются)</li>
+                        <li data-i18n="int5">Совместные игры и коллаборации (по желанию но приветствуются)</li>
+                        <li data-i18n="int6">Взаимная поддержка и помощь коллегам</li>
+                        <li data-i18n="int7">Уважительное отношение ко всем участников</li>
+                        <li data-i18n="int8">Не оскорбляем и не обсуждаем другие сквады и стримеров на стримах</li>
+                        <li data-i18n="int9">Соблюдать правила Twitch</li>
+                        <li data-i18n="int10">Не взаимодействовать с стримерами из черного списка</li>
+                    </ul>
+                </div>
+                <h3 data-i18n="warning">[ЗА НЕ СОБЛЮДЕНИЕ ПРАВИЛ ИЛИ АФК ВАС МОГУТ ИСКЛЮЧИТ]</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Раздел Черный список -->
+    <div class="section-container" id="blacklist-section">
+        <div class="section-header">
+            <h1><i class="fas fa-ban"></i> <span data-i18n="blacklistedStreamers">Стримеры в Черном Списке Сквада</span></h1>
+        </div>
+        <div class="section-content">
+            <div class="blacklist-grid" id="blacklistGrid">
+                <!-- Черный список будет добавляться здесь -->
+            </div>
+        </div>
+    </div>
 
     <script>
         // ════════════════════════════════════════════════════════════════════════
@@ -509,12 +743,481 @@
         const userNicknameInput = document.getElementById('userNickname');
         const applyNicknameButton = document.getElementById('applyNickname');
         const nicknameDisplay = document.getElementById('nicknameDisplay');
+        const navButtons = document.querySelectorAll('.nav-button');
+        const sectionContainers = document.querySelectorAll('.section-container');
+        const membersGrid = document.getElementById('membersGrid');
+        const blacklistGrid = document.getElementById('blacklistGrid');
+        const langToggle = document.getElementById('langToggle');
+        const currentLangSpan = document.getElementById('currentLang');
+
+        // Текущий язык
+        let currentLanguage = 'ru';
 
         // Текущий ник пользователя
         let currentNickname = '';
 
         // Ключ для хранения статуса заявки в localStorage
         const APPLICATION_STORAGE_KEY = 'hype_squad_application_submitted';
+
+        // Данные участников (можно заменить на реальные данные)
+        const MEMBERS_DATA = [
+            {
+                name: "MCPLEH",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/b7a31939-32c0-404d-8b5a-3bea0be49c98-profile_image-70x70.png",
+                role: "founder",
+                link: "https://www.twitch.tv/mcpleh"
+            },
+            {
+                name: "MindScratcher",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/acfe66be-4fd3-4736-bc55-474fd704a392-profile_image-70x70.png",
+                role: "member",
+                link: "https://www.twitch.tv/mindscratcher"
+            },
+            {
+                name: "Kakcaxap_OK",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/fcab06a2-414a-41d5-8d50-054959da2838-profile_image-70x70.jpeg",
+                role: "member",
+                link: "https://www.twitch.tv/kakcaxap_ok"
+            },
+            {
+                name: "Kalerine",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/99f2889a-f77a-4ef0-9990-a7aca8413760-profile_image-70x70.png",
+                role: "member",
+                link: "https://www.twitch.tv/kalerine"
+            },
+            {
+                name: "m_a_r_m_e_l",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/db88107d-5391-4c41-b173-8bb72807a4d9-profile_image-70x70.png",
+                role: "member",
+                link: "https://www.twitch.tv/m_a_r_m_e_l"
+            },
+            {
+                name: "xVETKA",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/998b3d6b-67c2-499c-8c9f-ee3a36c29fef-profile_image-70x70.png",
+                role: "member",
+                link: "https://www.twitch.tv/xvetka"
+            },
+            {
+                name: "NutaOo",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/284ef710-a998-4bd2-8ae8-c9651df3f507-profile_image-70x70.png",
+                role: "member",
+                link: "https://www.twitch.tv/nutaoo"
+            },
+            {
+                name: "Boost_Meee",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/c7136ce0-c019-45d9-8ec0-4567e8157918-profile_image-70x70.png",
+                role: "member",
+                link: "https://www.twitch.tv/boost_meee"
+            },
+            {
+                name: "neiron7",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/c8887432-080a-4fa3-8f09-5885f76e994f-profile_image-70x70.png",
+                role: "member",
+                link: "https://www.twitch.tv/neiron7"
+            },
+            {
+                name: "Ter_Mor",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/bb22edad-cf53-4bbd-b1b7-f41cd738e27b-profile_image-70x70.png",
+                role: "member",
+                link: "https://www.twitch.tv/ter_mor"
+            },
+            {
+                name: "LeoNyaa_",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/61bb14ef-c5bc-405e-aed9-a45cd208423d-profile_image-70x70.png",
+                role: "member",
+                link: "https://www.twitch.tv/leonyaa_"
+            },
+            {
+                name: "buusovich",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/82df4bf2-eb52-4875-b4b2-2b44a391da5b-profile_image-70x70.png",
+                role: "member",
+                link: "https://www.twitch.tv/buusovich"
+            },
+            {
+                name: "TARGET1v1",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/3cf95923-aeaf-4bb4-9b73-f0c4aef42096-profile_image-70x70.png",
+                role: "member",
+                link: "https://www.twitch.tv/target1v1"
+            },
+            {
+                name: "Last_Angel86",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/8f170ec5-2f18-47bb-abde-9e31b158f0b3-profile_image-70x70.png",
+                role: "member",
+                link: "https://www.twitch.tv/last_angel86"
+            },
+            {
+                name: "Torenak1",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/3b0a3d5d-612a-48a2-9591-92cad5f44641-profile_image-70x70.png",
+                role: "member",
+                link: "https://www.twitch.tv/torenak1"
+            },
+            {
+                name: "Vetka_Sakura",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/405455f9-2f15-412f-95ff-3a6ffcd23f1f-profile_image-70x70.png",
+                role: "member",
+                link: "https://www.twitch.tv/vetka_sakura"
+            },
+            {
+                name: "EvilGrenka",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/e0683018-bef0-4f03-b581-8ed533b436a8-profile_image-70x70.png",
+                role: "member",
+                link: "https://www.twitch.tv/evilgrenka"
+            },
+            {
+                name: "goleaf_gaming",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/08362008-b30c-4609-b665-68c0b82853cb-profile_image-70x70.png",
+                role: "member",
+                link: "https://www.twitch.tv/goleaf_gaming"
+            },
+            {
+                name: "eGxrkAShxw",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/3e8095d2-b74b-413b-aae0-9183f1963f7e-profile_image-70x70.png",
+                role: "member",
+                link: "https://www.twitch.tv/egxrkashxw"
+            },
+            {
+                name: "sqamelie",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/348ca406-073e-447f-82be-b9db37166994-profile_image-70x70.png",
+                role: "member",
+                link: "https://www.twitch.tv/sqamelie"
+            }
+        ];
+
+        // Данные черного списка (можно заменить на реальные данные)
+        const BLACKLIST_DATA = [
+            {
+                name: "maznevich",
+                avatar: "https://cdn.discordapp.com/attachments/1399010901620687019/1440942063423197184/image.png?ex=691ffd5f&is=691eabdf&hm=40994de64dbe5b6b0cd95a51428fad95ba65b6233e3c5e235143231837bf4ffd&",
+                reason: "Неадекватное поведение, рейдж байты, травля"
+            },
+            {
+                name: "zlobnayapoltoraha",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/4d2a66dc-0968-4d25-ae2c-812333a92275-profile_image-70x70.png",
+                reason: "Токсичное и неадекватное поведение"
+            },
+            {
+                name: "HERMITjke",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/a09c44ec-a0ab-4f08-b5a4-6a8aa2b016c7-profile_image-70x70.png",
+                reason: "Доксер, Мошенник, Читер, Ботовод"
+            },
+            {
+                name: "nekoneeeko_tv",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/266d25f1-3e61-44aa-b959-7f86b0207af0-profile_image-70x70.png",
+                reason: "Игра с читерами и Токсичность"
+            },
+            {
+                name: "van4ell_",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/0fc1339f-ce2e-4302-8a29-2d01e77719c4-profile_image-70x70.png",
+                reason: "Предательство и лицимерие"
+            },
+            {
+                name: "XoroshayaVikusia",
+                avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/5839fc4d-d977-40c6-9c45-7da339ca36d3-profile_image-70x70.png",
+                reason: "Лицимерка и Сплетница"
+            }
+        ];
+
+        // Тексты для перевода
+        const TRANSLATIONS = {
+            ru: {
+                // Навигация
+                "application": "Заявка",
+                "members": "Участники",
+                "information": "Информация",
+                "blacklist": "Черный список",
+                "squadOnTwitch": "Сквад на Twitch",
+                
+                // Заявка
+                "enterNickname": "Введите ваш ник...",
+                "apply": "Применить",
+                "online": "Онлайн",
+                "applicationDescription": "Расскажите о себе и почему вы хотите присоединиться к нам. Так же не забудте оставить ссылки на ваши контакты Twitch, Telegram, Discord:",
+                "enterMessage": "Сначала установите ник",
+                "sendApplication": "Отправить заявку",
+                "currentNickname": "Текущий ник:",
+                
+                // Участники
+                "squadMembers": "Участники Сквада",
+                
+                // Роли участников
+                "founder": "Основатель",
+                "member": "Участник",
+                "moderator": "Модератор",
+                "admin": "Администратор",
+                
+                // Информация
+                "squadRules": "Правила и Информация Сквада",
+                "requirementsTitle": "📝 Основные требования для вступления:",
+                "req1": "Быть компаньоном/партнером Twitch",
+                "req2": "Стримить минимум 3 раза в неделю",
+                "req3": "Возраст от 18 лет",
+                "req4": "Адекватность и грамотность",
+                "req5": "Нельзя быть в 2х или более сквадах одновременно",
+                "interactionTitle": "🤝 Взаимодействие участников и обязаности:",
+                "int1": "Защищать интересы сквада и его участников",
+                "int2": "Поддерживать дружескую атмосферу в сообществе",
+                "int3": "Участвовать в жизни сквада (по возможности)",
+                "int4": "Приоритет Рейдов коллегам  (по желанию но приветствуются)",
+                "int5": "Совместные игры и коллаборации (по желанию но приветствуются)",
+                "int6": "Взаимная поддержка и помощь коллегам",
+                "int7": "Уважительное отношение ко всем участников",
+                "int8": "Не оскорбляем и не обсуждаем другие сквады и стримеров на стримах",
+                "int9": "Соблюдать правила Twitch",
+                "int10": "Не взаимодействовать с стримерами из черного списка",
+                "warning": "[ЗА НЕ СОБЛЮДЕНИЕ ПРАВИЛ ИЛИ АФК ВАС МОГУТ ИСКЛЮЧИТ]",
+                
+                // Черный список
+                "blacklistedStreamers": "Стримеры в Черном Списке Сквада",
+                
+                // Причины в черном списке
+                "community_rules_violation": "Нарушение правил сообщества",
+                "fraud": "Мошенничество",
+                "multiple_violations": "Многократные нарушения",
+                "toxic_behavior": "Токсичное поведение",
+                "scam": "Обман",
+                "spam": "Спам",
+                
+                // Системные сообщения
+                "systemInfoTitle": "💜 Информация о Hype Squad 💜",
+                "systemInfoText": "Добро пожаловать в HYPE SQUAD <br> это сообщество перспективных стримеров Twitch!",
+                "afterApplication": " После подачи заявки:",
+                "afterApp1": "• Ожидайте рассмотрения вашей заявки",
+                "afterApp2": "• С вами свяжутся для уточнения деталей. Ответ может занять некоторое время", 
+                "afterApp3": "• Ознакомьтесь с правилами и  другими разделами выше 👆",
+                "applicationSent": "✅ Заявка отправлена",
+                "applicationSentText": "Ваша заявка в Hype Squad получена! Ожидайте рассмотрения и связи с вами.",
+                "alreadySubmitted": "Вы уже отправили заявку",
+                "alreadySubmittedText": "Вы уже отправили заявку в Hype Squad!",
+                "resubmissionNotPossible": "Повторная заявка невозможна",
+                "applicationUnderReview": "• Ваша заявка уже находится на рассмотрении",
+                "waitForContact": "• Ожидайте связи от представителей сквада с вами",
+                "applicationStatus": "📋 Статус заявки",
+                
+                // Кнопка языка
+                "russian": "Русский",
+                "english": "English"
+            },
+            en: {
+                // Navigation
+                "application": "Application",
+                "members": "Members",
+                "information": "Information",
+                "blacklist": "Blacklist",
+                "squadOnTwitch": "Squad on Twitch",
+                
+                // Application
+                "enterNickname": "Enter your nickname...",
+                "apply": "Apply",
+                "online": "Online",
+                "applicationDescription": "Tell us about yourself and why you want to join us. Also don't forget to leave links to your Twitch, Telegram, Discord contacts:",
+                "enterMessage": "First set your nickname",
+                "sendApplication": "Send Application",
+                "currentNickname": "Current nickname:",
+                
+                // Members
+                "squadMembers": "Squad Members",
+                
+                // Member roles
+                "founder": "Founder",
+                "member": "Member",
+                "moderator": "Moderator",
+                "admin": "Administrator",
+                
+                // Information
+                "squadRules": "Squad Rules and Information",
+                "requirementsTitle": " Basic requirements for joining:",
+                "req1": "Be a Twitch affiliate/partner",
+                "req2": "Stream at least 3 times a week",
+                "req3": "Age 18+",
+                "req4": "Adequacy and literacy",
+                "req5": "Cannot be in 2 or more squads at the same time",
+                "interactionTitle": "🤝 Member interaction and responsibilities:",
+                "int1": "Protect the interests of the squad and its members",
+                "int2": "Maintain a friendly atmosphere in the community",
+                "int3": "Participate in squad life (when possible)",
+                "int4": "Priority raids to colleagues (optional but welcome)",
+                "int5": "Joint games and collaborations (optional but welcome)",
+                "int6": "Mutual support and help for colleagues",
+                "int7": "Respectful attitude towards all members",
+                "int8": "Do not insult or discuss other squads and streamers on streams",
+                "int9": "Follow Twitch rules",
+                "int10": "Do not interact with streamers from the blacklist",
+                "warning": "[FOR NOT FOLLOWING THE RULES OR BEING AFK YOU MAY BE EXCLUDED]",
+                
+                // Blacklist
+                "blacklistedStreamers": "Streamers in Squad Blacklist",
+                
+                // Blacklist reasons
+                "Неадекватное поведение, рейдж байты, травля": "Inappropriate behavior, raid bytes, bullying",
+                "Токсичное и неадекватное поведение": "Toxic and inappropriate behavior",
+                "Доксер, Мошенник, Читер, Ботовод": "Doxer, Scammer, Cheater, Uses Twitch Bots",
+                "Игра с читерами и Токсичность": "Toxic behavior",
+                "Предательство и лицимерие": "Betrayal and licentiousness",
+                "Лицимерка и Сплетница": "A hypocrite and a gossip",
+                
+                // System messages
+                "systemInfoTitle": "💜 Information about Hype Squad 💜",
+                "systemInfoText": "Welcome to HYPE SQUAD, a community of promising Twitch streamers!",
+                "afterApplication": " After submitting application:",
+                "afterApp1": "• Wait for your application to be reviewed",
+                "afterApp2": "• You will be contacted to clarify details. Response may take some time",
+                "afterApp3": "• Check out the rules and other sections above 👆",
+                "applicationSent": "✅ Application sent",
+                "applicationSentText": "Your application to Hype Squad has been received! Wait for review and contact.",
+                "alreadySubmitted": "You have already submitted an application",
+                "alreadySubmittedText": "You have already submitted an application to Hype Squad!",
+                "resubmissionNotPossible": "Resubmission is not possible",
+                "applicationUnderReview": "• Your application is already under review",
+                "waitForContact": "• Wait for contact from squad representatives",
+                "applicationStatus": "📋 Application Status",
+                
+                // Language button
+                "russian": "Русский",
+                "english": "English"
+            }
+        };
+
+        // Инициализация при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeLanguage();
+            initializeApplication();
+            initializeNavigation();
+            loadMembers();
+            loadBlacklist();
+        });
+
+        // Инициализация языка
+        function initializeLanguage() {
+            // Проверяем сохраненный язык в localStorage
+            const savedLang = localStorage.getItem('hype_squad_language');
+            if (savedLang) {
+                currentLanguage = savedLang;
+            }
+            
+            // Устанавливаем язык
+            setLanguage(currentLanguage);
+            
+            // Обработчик для кнопки переключения языка
+            langToggle.addEventListener('click', toggleLanguage);
+        }
+
+        // Переключение языка
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'ru' ? 'en' : 'ru';
+            setLanguage(currentLanguage);
+            localStorage.setItem('hype_squad_language', currentLanguage);
+            
+            // Перезагружаем системные сообщения если они уже отображены
+            reloadSystemMessages();
+            // Перезагружаем участников и черный список
+            loadMembers();
+            loadBlacklist();
+        }
+
+        // Перезагрузка системных сообщений при смене языка
+        function reloadSystemMessages() {
+            const systemMessages = applicationMessages.querySelectorAll('.message.system');
+            if (systemMessages.length > 0) {
+                // Очищаем сообщения и добавляем заново на текущем языке
+                applicationMessages.innerHTML = '';
+                if (!isApplicationSubmitted()) {
+                    addSystemMessage();
+                } else {
+                    showAlreadySubmittedMessage();
+                }
+            }
+        }
+
+        // Установка языка
+        function setLanguage(lang) {
+            // Обновляем текст кнопки языка
+            currentLangSpan.textContent = lang === 'ru' ? TRANSLATIONS[lang].russian : TRANSLATIONS[lang].english;
+            
+            // Обновляем все элементы с data-i18n атрибутом
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (TRANSLATIONS[lang][key]) {
+                    element.textContent = TRANSLATIONS[lang][key];
+                }
+            });
+            
+            // Обновляем плейсхолдеры
+            userNicknameInput.placeholder = TRANSLATIONS[lang].enterNickname;
+            messageInput.placeholder = TRANSLATIONS[lang].enterMessage;
+            
+            // Обновляем никнейм дисплей если он установлен
+            if (currentNickname) {
+                nicknameDisplay.textContent = `${TRANSLATIONS[lang].currentNickname} ${currentNickname}`;
+            }
+        }
+
+        // Инициализация навигации
+        function initializeNavigation() {
+            navButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    if (this.getAttribute('data-section')) {
+                        // Убираем активный класс у всех кнопок
+                        navButtons.forEach(btn => btn.classList.remove('active'));
+                        // Добавляем активный класс текущей кнопке
+                        this.classList.add('active');
+                        
+                        // Скрываем все разделы
+                        sectionContainers.forEach(section => section.classList.remove('active'));
+                        
+                        // Показываем выбранный раздел
+                        const sectionId = this.getAttribute('data-section') + '-section';
+                        document.getElementById(sectionId).classList.add('active');
+                    }
+                });
+            });
+        }
+
+        // Загрузка списка участников
+        function loadMembers() {
+            membersGrid.innerHTML = '';
+            MEMBERS_DATA.forEach(member => {
+                const memberCard = document.createElement('div');
+                memberCard.className = 'member-card';
+                
+                const avatarLink = member.link ? 
+                    `<a href="${member.link}" target="_blank">` :
+                    '';
+                const avatarLinkClose = member.link ? '</a>' : '';
+                
+                // Получаем перевод роли
+                const translatedRole = TRANSLATIONS[currentLanguage][member.role] || member.role;
+                
+                memberCard.innerHTML = `
+                    ${avatarLink}
+                    <img src="${member.avatar}" alt="${member.name}" class="member-avatar">
+                    ${avatarLinkClose}
+                    <div class="member-name">${member.name}</div>
+                    <div class="member-role">${translatedRole}</div>
+                `;
+                
+                membersGrid.appendChild(memberCard);
+            });
+        }
+
+        // Загрузка черного списка
+        function loadBlacklist() {
+            blacklistGrid.innerHTML = '';
+            BLACKLIST_DATA.forEach(banned => {
+                const blacklistCard = document.createElement('div');
+                blacklistCard.className = 'blacklist-card';
+                
+                // Получаем перевод причины
+                const translatedReason = TRANSLATIONS[currentLanguage][banned.reason] || banned.reason;
+                
+                blacklistCard.innerHTML = `
+                    <img src="${banned.avatar}" alt="${banned.name}" class="member-avatar" style="cursor: not-allowed; opacity: 0.7;">
+                    <div class="member-name" style="color: #ff4757;">${banned.name}</div>
+                    <div class="blacklist-reason">${translatedReason}</div>
+                `;
+                
+                blacklistGrid.appendChild(blacklistCard);
+            });
+        }
 
         // Проверка, была ли уже отправлена заявка
         function isApplicationSubmitted() {
@@ -569,8 +1272,8 @@
             sendButton.disabled = true;
             
             // Меняем текст подсказки
-            messageInput.placeholder = "Вы уже отправили заявку";
-            userNicknameInput.placeholder = "Заявка уже отправлена";
+            messageInput.placeholder = TRANSLATIONS[currentLanguage].alreadySubmitted;
+            userNicknameInput.placeholder = TRANSLATIONS[currentLanguage].alreadySubmitted;
             
             // Добавляем сообщение в чат
             const messageDiv = document.createElement('div');
@@ -582,12 +1285,12 @@
             });
 
             messageDiv.innerHTML = `
-                <div class="message-header">📋 Статус заявки</div>
+                <div class="message-header">${TRANSLATIONS[currentLanguage].applicationStatus}</div>
                 <div class="message-text">
-                    <strong>Вы уже отправили заявку в Hype Squad!</strong><br><br>
-                    ❗ <strong>Повторная заявка невозможна</strong><br>
-                    • Ваша заявка уже находится на рассмотрении<br>
-                    • Ожидайте связи от представителей сквада с вами<br>
+                    <strong>${TRANSLATIONS[currentLanguage].alreadySubmittedText}</strong><br><br>
+                    ❗ <strong>${TRANSLATIONS[currentLanguage].resubmissionNotPossible}</strong><br>
+                    ${TRANSLATIONS[currentLanguage].applicationUnderReview}<br>
+                    ${TRANSLATIONS[currentLanguage].waitForContact}<br>
                 </div>
                 <div class="message-time">${timeString}</div>
             `;
@@ -607,20 +1310,14 @@
             });
 
             messageDiv.innerHTML = `
-                <div class="message-header">💡 Информация о Hype Squad</div>
+                <div class="message-header">${TRANSLATIONS[currentLanguage].systemInfoTitle}</div>
                 <div class="message-text">
-                    <strong>HYPE SQUAD - сообщество перспективных стримеров Twitch!</strong><br><br>
-                    📝 <strong>Требования для вступления:</strong><br>
-                    • Быть компаньоном/партнером Twitch<br>
-                    • Стримить минимум 3 раза в неделю<br>
-                    • Возраст от 18 лет, Адекватность и Грамотность<br>
-                    • Защищать интересы сквада и его участников, если таковые имеются<br>
-                    • Нельзя быть в 2х или более сквадах одновременно<br>
-                    • Рейды коллегам или совместные игры с ними (по желанию, но приветствуются!)<br><br>
-                    🔄 <strong>После подачи заявки:</strong><br>
-                    • Ожидайте рассмотрения вашей заявки<br>
-                    • С вами свяжутся для уточнения деталей<br>
-                    • Ответ может занять некоторое время
+                    <strong>${TRANSLATIONS[currentLanguage].systemInfoText}</strong><br><br>
+
+                    🔄 <strong>${TRANSLATIONS[currentLanguage].afterApplication}:</strong><br>
+                    ${TRANSLATIONS[currentLanguage].afterApp1}<br>
+                    ${TRANSLATIONS[currentLanguage].afterApp2}<br>
+                    ${TRANSLATIONS[currentLanguage].afterApp3}
                 </div>
                 <div class="message-time">${timeString}</div>
             `;
@@ -640,16 +1337,16 @@
             const nickname = userNicknameInput.value.trim();
             if (nickname) {
                 currentNickname = nickname;
-                nicknameDisplay.textContent = `Текущий ник: ${currentNickname}`;
+                nicknameDisplay.textContent = `${TRANSLATIONS[currentLanguage].currentNickname} ${currentNickname}`;
                 messageInput.disabled = false;
-                messageInput.placeholder = "Расскажите о себе и почему хотите присоединиться к Hype Squad...";
+                messageInput.placeholder = TRANSLATIONS[currentLanguage].applicationDescription.substring(0, 50) + '...';
                 messageInput.focus();
                 updateSendButtonState();
                 
                 // Блокируем поле ника после применения
                 userNicknameInput.disabled = true;
                 applyNicknameButton.disabled = true;
-                applyNicknameButton.textContent = "✓ Применен";
+                applyNicknameButton.innerHTML = "✓ " + TRANSLATIONS[currentLanguage].apply;
                 applyNicknameButton.style.background = "#6c757d";
             }
         }
@@ -686,9 +1383,9 @@
             
             // Форматируем заявку
             const formattedMessage = `
-НОВАЯ ЗАЯВКА В HYPE SQUAD
+⚠️НОВАЯ ЗАЯВКА В СКВАД⚠️
 
-👤 Ник: ${currentNickname}
+👤 Ник: @${currentNickname}
 📝 Сообщение: ${text}
             `.trim();
             
@@ -730,7 +1427,7 @@
             // Блокируем кнопку на время отправки
             const originalText = sendButton.textContent;
             sendButton.disabled = true;
-            sendButton.textContent = 'Отправка...';
+            sendButton.innerHTML = TRANSLATIONS[currentLanguage].sendApplication + '...';
             messageInput.disabled = true;
 
             try {
@@ -749,11 +1446,10 @@
                 const successDiv = document.createElement('div');
                 successDiv.className = 'message system';
                 successDiv.innerHTML = `
-                    <div class="message-header">✅ Заявка отправлена</div>
+                    <div class="message-header">✅ ${TRANSLATIONS[currentLanguage].applicationSent}</div>
                     <div class="message-text">
-                        Ваша заявка в Hype Squad получена!<br>
-                        Ожидайте рассмотрения и связи с вами.<br>
-                        <strong>Повторная отправка заявки невозможна.</strong>
+                        ${TRANSLATIONS[currentLanguage].applicationSentText}<br>
+                        <strong>${TRANSLATIONS[currentLanguage].resubmissionNotPossible}.</strong>
                     </div>
                     <div class="message-time">${new Date().toLocaleTimeString('ru-RU', {hour: '2-digit', minute: '2-digit'})}</div>
                 `;
@@ -770,17 +1466,17 @@
                 }
                 
                 // Показываем ошибку на короткое время
-                statusText.textContent = '● Ошибка отправки';
+                statusText.innerHTML = '● ' + (currentLanguage === 'ru' ? 'Ошибка отправки' : 'Send Error');
                 statusText.className = 'status-disconnected';
                 setTimeout(() => {
-                    statusText.textContent = '● Онлайн';
+                    statusText.innerHTML = '● ' + TRANSLATIONS[currentLanguage].online;
                     statusText.className = 'status-connected';
                 }, 3000);
             } finally {
                 // Разблокируем кнопку только если отправка не удалась
                 if (!isApplicationSubmitted()) {
                     sendButton.disabled = false;
-                    sendButton.textContent = originalText;
+                    sendButton.innerHTML = originalText;
                     messageInput.disabled = false;
                     updateSendButtonState();
                     messageInput.focus();
@@ -788,9 +1484,6 @@
             }
         }
 
-        // Инициализация при загрузке
-        document.addEventListener('DOMContentLoaded', initializeApplication);
-        
         // Блокировка контекстного меню (правой кнопки мыши)
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
@@ -817,141 +1510,142 @@
             }
         });
     </script>
+
     <!-- Скрытая панель сброса для разработчиков -->
-<div id="devResetPanel" style="position: fixed; bottom: 10px; left: 10px; background: rgba(0,0,0,0.8); padding: 10px; border-radius: 5px; border: 1px solid #9147ff; z-index: 10000; display: none;">
-    <button onclick="resetApplication()" style="background: #ff4757; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; margin-right: 5px;">
-        🔄 Сбросить заявку
-    </button>
-    <button onclick="checkApplicationStatus()" style="background: #3742fa; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; margin-right: 5px;">
-        📊 Статус
-    </button>
-    <button onclick="toggleDevPanel()" style="background: #2ed573; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">
-        ❌ Закрыть
-    </button>
-</div>
+    <div id="devResetPanel" style="position: fixed; bottom: 10px; left: 10px; background: rgba(0,0,0,0.8); padding: 10px; border-radius: 5px; border: 1px solid #9147ff; z-index: 10000; display: none;">
+        <button onclick="resetApplication()" style="background: #ff4757; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; margin-right: 5px;">
+            🔄 Сбросить заявку
+        </button>
+        <button onclick="toggleDevPanel()" style="background: #2ed573; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">
+            ❌ Закрыть
+        </button>
+    </div>
 
-<script>
-    // Функции для управления разработчиком
-    let devPanelVisible = false;
+    <script>
+        // Функции для управления разработчиком
+        let devPanelVisible = false;
 
-    // Переключение панели разработчика
-    function toggleDevPanel() {
-        const panel = document.getElementById('devResetPanel');
-        devPanelVisible = !devPanelVisible;
-        panel.style.display = devPanelVisible ? 'block' : 'none';
-        
-        if (devPanelVisible) {
-            console.log('🔧 Панель разработчика активирована');
-        }
-    }
-
-    // Функция полного сброса регистрации
-    function resetApplication() {
-        // Удаляем данные из хранилищ
-        sessionStorage.removeItem('hype_squad_application_submitted');
-        localStorage.removeItem('hype_squad_application_submitted');
-        
-        // Сбрасываем флаги
-        if (typeof applicationSubmittedInSession !== 'undefined') {
-            applicationSubmittedInSession = false;
-        }
-        
-        // Показываем уведомление
-        showDevNotification('✅ Регистрация сброшена! Страница перезагружается...', 'success');
-        
-        console.log('🎯 РЕГИСТРАЦИЯ СБРОШЕНА:');
-        console.log('📝 sessionStorage очищен');
-        console.log('💾 localStorage очищен');
-        console.log('🚩 Флаг сессии сброшен');
-        
-        // Перезагрузка через 1.5 секунды
-        setTimeout(() => {
-            location.reload();
-        }, 1500);
-    }
-
-    // Проверить текущий статус регистрации
-    function checkApplicationStatus() {
-        const sessionStatus = sessionStorage.getItem('hype_squad_application_submitted');
-        const localStatus = localStorage.getItem('hype_squad_application_submitted');
-        const sessionFlag = typeof applicationSubmittedInSession !== 'undefined' ? applicationSubmittedInSession : 'не определен';
-        
-        console.log('📊 СТАТУС РЕГИСТРАЦИИ:');
-        console.log('sessionStorage:', sessionStatus);
-        console.log('localStorage:', localStatus);
-        console.log('Флаг сессии:', sessionFlag);
-        
-        showDevNotification('📊 Статус проверен (смотрите консоль)', 'info');
-    }
-
-    // Показать уведомление для разработчика
-    function showDevNotification(message, type = 'info') {
-        // Создаем элемент уведомления
-        const notification = document.createElement('div');
-        notification.textContent = message;
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: ${type === 'success' ? '#2ed573' : type === 'error' ? '#ff4757' : '#3742fa'};
-            color: white;
-            padding: 15px 20px;
-            border-radius: 5px;
-            z-index: 10001;
-            font-family: 'Segoe UI', sans-serif;
-            font-size: 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            animation: slideIn 0.3s ease-out;
-        `;
-        
-        document.body.appendChild(notification);
-        
-        // Автоматическое удаление через 3 секунды
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
+        // Переключение панели разработчика
+        function toggleDevPanel() {
+            const panel = document.getElementById('devResetPanel');
+            devPanelVisible = !devPanelVisible;
+            panel.style.display = devPanelVisible ? 'block' : 'none';
+            
+            if (devPanelVisible) {
+                console.log('🔧 Панель разработчика активирована');
             }
-        }, 3000);
-    }
+        }
 
-    // Стиль для анимации уведомления
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+        // Функция полного сброса регистрации
+        function resetApplication() {
+            // Удаляем данные из хранилищ
+            sessionStorage.removeItem('hype_squad_application_submitted');
+            localStorage.removeItem('hype_squad_application_submitted');
+            localStorage.removeItem('hype_squad_language');
+            
+            // Сбрасываем флаги
+            if (typeof applicationSubmittedInSession !== 'undefined') {
+                applicationSubmittedInSession = false;
+            }
+            
+            // Показываем уведомление
+            showDevNotification('✅ Регистрация сброшена! Страница перезагружается...', 'success');
+            
+            console.log('🎯 РЕГИСТРАЦИЯ СБРОШЕНА:');
+            console.log('📝 sessionStorage очищен');
+            console.log('💾 localStorage очищен');
+            console.log('🚩 Флаг сессии сброшен');
+            
+            // Перезагрузка через 1.5 секунды
+            setTimeout(() => {
+                location.reload();
+            }, 1500);
         }
-    `;
-    document.head.appendChild(style);
 
-    // Активация по комбинации клавиш (Alt+Shift+R)
-    document.addEventListener('keydown', function(e) {
-        // Alt+Shift+R для активации панели
-        if (e.altKey && e.shiftKey && e.key === 'R') {
-            e.preventDefault();
-            toggleDevPanel();
+        // Проверить текущий статус регистрации
+        function checkApplicationStatus() {
+            const sessionStatus = sessionStorage.getItem('hype_squad_application_submitted');
+            const localStatus = localStorage.getItem('hype_squad_application_submitted');
+            const languageStatus = localStorage.getItem('hype_squad_language');
+            const sessionFlag = typeof applicationSubmittedInSession !== 'undefined' ? applicationSubmittedInSession : 'не определен';
+            
+            console.log('📊 СТАТУС РЕГИСТРАЦИИ:');
+            console.log('sessionStorage:', sessionStatus);
+            console.log('localStorage:', localStatus);
+            console.log('Язык:', languageStatus);
+            console.log('Флаг сессии:', sessionFlag);
+            
+            showDevNotification('📊 Статус проверен (смотрите консоль)', 'info');
         }
-        
-        // Alt+Shift+D для быстрого сброса
-        if (e.altKey && e.shiftKey && e.key === 'D') {
-            e.preventDefault();
-            resetApplication();
-        }
-        
-        // Alt+Shift+S для проверки статуса
-        if (e.altKey && e.shiftKey && e.key === 'S') {
-            e.preventDefault();
-            checkApplicationStatus();
-        }
-    });
 
-    // Инструкция при загрузке (только в консоли)
-    setTimeout(() => {
-        console.log('🔧 Инструменты разработчика доступны:');
-        console.log('• Alt+Shift+R - Открыть панель сброса');
-        console.log('• Alt+Shift+D - Быстрый сброс регистрации');
-        console.log('• Alt+Shift+S - Проверить статус');
-    }, 2000);
-</script>
+        // Показать уведомление для разработчика
+        function showDevNotification(message, type = 'info') {
+            // Создаем элемент уведомления
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#2ed573' : type === 'error' ? '#ff4757' : '#3742fa'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 5px;
+                z-index: 10001;
+                font-family: 'Segoe UI', sans-serif;
+                font-size: 14px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                animation: slideIn 0.3s ease-out;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Автоматическое удаление через 3 секунды
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 3000);
+        }
+
+        // Стиль для анимации уведомления
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Активация по комбинации клавиш (Alt+Shift+R)
+        document.addEventListener('keydown', function(e) {
+            // Alt+Shift+R для активации панели
+            if (e.altKey && e.shiftKey && e.key === 'R') {
+                e.preventDefault();
+                toggleDevPanel();
+            }
+            
+            // Alt+Shift+D для быстрого сброса
+            if (e.altKey && e.shiftKey && e.key === 'D') {
+                e.preventDefault();
+                resetApplication();
+            }
+            
+            // Alt+Shift+S для проверки статуса
+            if (e.altKey && e.shiftKey && e.key === 'S') {
+                e.preventDefault();
+                checkApplicationStatus();
+            }
+        });
+
+        // Инструкция при загрузке (только в консоли)
+        setTimeout(() => {
+            console.log('🔧 Инструменты разработчика доступны:');
+            console.log('• Alt+Shift+R - Открыть панель сброса');
+            console.log('• Alt+Shift+D - Быстрый сброс регистрации');
+            console.log('• Alt+Shift+S - Проверить статус');
+        }, 2000);
+    </script>
 </body>
 </html>
